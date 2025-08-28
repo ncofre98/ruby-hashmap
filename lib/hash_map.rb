@@ -1,3 +1,6 @@
+require_relative 'node'
+require_relative 'linked_list'
+
 class HashMap
   attr_accessor :load_factor, :capacity
 
