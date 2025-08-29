@@ -37,4 +37,9 @@ class HashMap
     hashed = hash(key) % capacity
     bucket[hashed].nil? ? nil : bucket[hashed].get(key)
   end
+
+  def has?(key)
+    hashed = hash(key) % capacity
+    bucket[hashed].nil? ? false : bucket[hashed].contains?(key)
+  end
 end
