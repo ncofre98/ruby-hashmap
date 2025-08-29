@@ -1,12 +1,12 @@
 class LinkedList
-  attr_accessor :head, :tail, :size
+  attr_accessor :head
   
   def initialize
     @head = nil
   end
 
-  def append(value)
-    node = Node.new(value)
+  def append(key = nil, value)
+    node = Node.new(key, value)
     if head.nil?
       self.head = node
     else
@@ -19,7 +19,7 @@ class LinkedList
   end
 
   def prepend(value)
-    node = Node.new(value)
+    node = Node.new(key,value)
     if head.nil?
       self.head = node
     else
@@ -79,11 +79,11 @@ class LinkedList
     false
   end
 
-  def find(value)
+  def find(key)
     current = head
     index = 0
     while current
-      return index if current.value == value
+      return index if current.key == key
       current = current.next_node
       index += 1
     end
@@ -118,6 +118,19 @@ class LinkedList
         current = current.next_node
       end
     end
+  end
+
+  def set(key, value)
+    current = head
+    while current
+      if current.key == key
+        current.value = value
+        return
+      else
+        current = current.next_node
+      end
+    end
+    current = Node.new(key, value)
   end
 
   def remove_at(index)
