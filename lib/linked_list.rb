@@ -70,10 +70,10 @@ class LinkedList
     current.next_node = nil
   end
 
-  def contains?(value)
+  def contains?(key)
     current = head
     while current
-      return true if current.value == value
+      return true if current.key == key
       current = current.next_node
     end
     false
@@ -131,6 +131,15 @@ class LinkedList
       end
     end
     current = Node.new(key, value)
+  end
+
+  def get(key)
+    current = head
+    while current
+      return current.value if current.key == key
+      current = current.next_node
+    end
+    nil
   end
 
   def remove_at(index)

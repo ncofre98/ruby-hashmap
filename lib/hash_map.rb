@@ -2,11 +2,14 @@ require_relative 'node'
 require_relative 'linked_list'
 
 class HashMap
-  attr_accessor :bucket, :load_factor, :capacity
+  LOAD_FACTOR = 0.8
 
+  
+  attr_accessor :bucket, :capacity
+
+  
   def initialize
     @capacity = 16
-    @load_factor = 0.8
     @bucket = [nil] * 16
   end
 
@@ -28,5 +31,10 @@ class HashMap
       ll.append(key, value)
       bucket[hashed] = ll
     end
+  end
+
+  def get(key)
+    hashed = hash(key) % capacity
+    bucket[hashed].nil? ? nil : bucket[hashed].get(key)
   end
 end
