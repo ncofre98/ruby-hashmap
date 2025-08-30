@@ -47,4 +47,10 @@ class HashMap
     hashed = hash(key) % capacity
     bucket[hashed].nil? ? nil : bucket[hashed].remove(key)
   end
+
+  def length
+    size = 0
+    self.bucket.compact.each { |b| size += b.size }
+    size
+  end
 end
