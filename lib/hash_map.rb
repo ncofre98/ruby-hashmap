@@ -42,4 +42,9 @@ class HashMap
     hashed = hash(key) % capacity
     bucket[hashed].nil? ? false : bucket[hashed].contains?(key)
   end
+
+  def remove(key)
+    hashed = hash(key) % capacity
+    bucket[hashed].nil? ? nil : bucket[hashed].remove(key)
+  end
 end

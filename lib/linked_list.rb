@@ -142,6 +142,25 @@ class LinkedList
     nil
   end
 
+  def remove(key)
+    deleted = nil
+    if head.key == key
+      deleted = head.value
+      self.head = head.next_node
+    else
+      current = head
+      while current
+        if current.next_node.key == key
+          deleted = current.next_node.value
+          current.next_node = current.next_node.next_node
+          break
+        end
+        current = current.next_node
+      end
+    end
+    deleted
+  end
+
   def remove_at(index)
     if index == 0
       self.head = head.next_node
