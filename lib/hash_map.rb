@@ -50,7 +50,11 @@ class HashMap
 
   def length
     size = 0
-    self.bucket.compact.each { |b| size += b.size }
+    bucket.compact.each { |b| size += b.size }
     size
+  end
+
+  def clear
+    initialize
   end
 end
