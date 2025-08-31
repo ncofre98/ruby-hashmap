@@ -18,16 +18,6 @@ class LinkedList
     end
   end
 
-  def prepend(value)
-    node = Node.new(key,value)
-    if head.nil?
-      self.head = node
-    else
-      node.next_node = self.head
-      self.head = node
-    end
-  end
-
   def size
     return 0 if head.nil?
     size = 1
@@ -37,37 +27,6 @@ class LinkedList
       current = current.next_node
     end
     size
-  end
-
-  def tail
-    return nil if head.nil?
-    current = head
-    while current.next_node
-      current = current.next_node
-    end
-    current
-  end
-
-  def at(index)
-    current = head
-    while current.next_node && index != 0
-      current = current.next_node
-      index -= 1
-    end
-    #If index is bigger than the list's size - 1, nil is returned
-    index != 0 ? nil : current
-  end
-
-  def pop
-    if !head || !head.next_node
-      self.head = nil
-      return
-    end
-    current = head
-    while current.next_node.next_node
-      current = current.next_node
-    end
-    current.next_node = nil
   end
 
   def contains?(key)
@@ -99,25 +58,6 @@ class LinkedList
     end
     string += "nil"
     string
-  end
-
-  #Extra credit
-  def insert_at(value, index)
-    if index == 0
-      prepend(value)
-    else
-      node = Node.new(value)
-      current = head
-      while current
-        index -= 1
-        if index == 0
-          node.next_node = current.next_node
-          current.next_node = node
-          return
-        end
-        current = current.next_node
-      end
-    end
   end
 
   def set(key, value)
@@ -161,19 +101,22 @@ class LinkedList
     deleted
   end
 
-  def remove_at(index)
-    if index == 0
-      self.head = head.next_node
-      return
-    end
+  def get_all(req)
+    arr = []
     current = head
-    while current
-      index -= 1
-      if index == 0
-        current.next_node = current.next_node.next_node if !current.next_node.nil?
-        return
+    if ['key', 'value'].include?(req)
+      while current
+        arr << current.send(req)
+        current = current.next_node
       end
-      current = current.next_node
+    elsif req == 'entries'
+      while current
+        arr << [current.key, current.value]
+        current = current.next_node
+      end
     end
+    
+    arr
   end
+  
 end

@@ -8,6 +8,7 @@ hashmap.set('perro', 'canelástico')
 hashmap.set('gata2', 'ninamaria')
 p hashmap
 p hashmap.length
-hashmap.clear
-p hashmap
+p hashmap.keys
+p hashmap.values
+p hashmap.entries
 #p hashmap

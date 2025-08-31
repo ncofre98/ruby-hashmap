@@ -57,4 +57,22 @@ class HashMap
   def clear
     initialize
   end
+
+  def keys
+    all_keys = []
+    bucket.compact.each { |b| all_keys += b.get_all('key') }
+    all_keys
+  end
+
+  def values
+    all_values = []
+    bucket.compact.each { |b| all_values += b.get_all('value') }
+    all_values
+  end
+
+  def entries
+    all_entries = []
+    bucket.compact.each { |b| all_entries += b.get_all('entries') }
+    all_entries
+  end
 end
