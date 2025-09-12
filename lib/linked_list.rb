@@ -1,20 +1,19 @@
 class LinkedList
-  attr_accessor :head
+  attr_accessor :head, :tail
   
   def initialize
     @head = nil
+    @tail = nil
   end
 
   def append(key = nil, value)
     node = Node.new(key, value)
     if head.nil?
       self.head = node
+      self.tail = head
     else
-      current = head
-      while current.next_node
-        current = current.next_node
-      end
-      current.next_node = node
+      tail.next_node = node
+      self.tail = tail.next_node
     end
   end
 
@@ -70,7 +69,8 @@ class LinkedList
         current = current.next_node
       end
     end
-    current = Node.new(key, value)
+    self.tail.next_node = Node.new(key, value)
+    self.tail = self.tail.next_node
   end
 
   def get(key)

@@ -2,15 +2,14 @@ require_relative 'node'
 require_relative 'linked_list'
 
 class HashMap
-  LOAD_FACTOR = 0.8
-
-  
-  attr_accessor :bucket, :capacity
-
+  attr_accessor :bucket, :capacity, :size
+  attr_reader :load_factor
   
   def initialize
     @capacity = 16
-    @bucket = [nil] * 16
+    @load_factor = 0.8
+    @bucket = [nil] * capacity
+    @size = 0
   end
 
   def hash(key)
@@ -22,14 +21,24 @@ class HashMap
     hash_code
   end
 
+  def rehash
+    self.capacity *= 2
+    self.bucket = [nil] * capacity
+    all_entries = entries()
+
+    all_entries.each { |entry| set(entry[0], entry[1]) }
+  end
+
   def set(key, value)
     hashed = hash(key) % capacity
     if bucket[hashed]
       bucket[hashed].set(key, value)
     else
+      rehash() if size > load_factor * capacity
       ll = LinkedList.new
       ll.append(key, value)
       bucket[hashed] = ll
+      self.size += 1
     end
   end
 
@@ -45,12 +54,15 @@ class HashMap
 
   def remove(key)
     hashed = hash(key) % capacity
-    bucket[hashed].nil? ? nil : bucket[hashed].remove(key)
+    if bucket[hashed].nil?
+      nil
+    else
+      self.size -= 1
+      bucket[hashed].remove(key)
+    end
   end
 
   def length
-    size = 0
-    bucket.compact.each { |b| size += b.size }
     size
   end
 
