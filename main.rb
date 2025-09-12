@@ -1,14 +1,23 @@
 require_relative 'lib/hash_map'
 
-hashmap = HashMap.new
-hashmap.set('gato', 'solovino')
-hashmap.set('gata', 'mimi')
-hashmap.set('gato', 'solovino el gato blanco y guapo')
-hashmap.set('perro', 'canelástico')
-hashmap.set('gata2', 'ninamaria')
-p hashmap
-p hashmap.length
-p hashmap.keys
-p hashmap.values
-p hashmap.entries
-#p hashmap
+test = HashMap.new
+test.set('apple', 'red')
+test.set('banana', 'yellow')
+test.set('carrot', 'orange')
+test.set('dog', 'brown')
+test.set('elephant', 'gray')
+test.set('frog', 'green')
+test.set('grape', 'purple')
+test.set('hat', 'black')
+test.set('ice cream', 'white')
+test.set('jacket', 'blue')
+test.set('kite', 'pink')
+test.set('lion', 'golden')
+
+p test
+p test.length
+p test.keys
+p test.values
+puts "\n\n"
+p test.entries
+

@@ -59,18 +59,20 @@ class LinkedList
     string
   end
 
+  #Returns false if value was modified, true if new node was inserted
   def set(key, value)
     current = head
     while current
       if current.key == key
         current.value = value
-        return
+        return false
       else
         current = current.next_node
       end
     end
     self.tail.next_node = Node.new(key, value)
     self.tail = self.tail.next_node
+    true
   end
 
   def get(key)

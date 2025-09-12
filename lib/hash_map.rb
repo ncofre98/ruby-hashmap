@@ -31,15 +31,21 @@ class HashMap
 
   def set(key, value)
     hashed = hash(key) % capacity
+    inserted = true
+    
     if bucket[hashed]
-      bucket[hashed].set(key, value)
+      inserted = bucket[hashed].set(key, value)
     else
-      rehash() if size > load_factor * capacity
+      if size > load_factor * capacity
+        rehash()
+        hashed = hash(key) % capacity
+      end
       ll = LinkedList.new
       ll.append(key, value)
       bucket[hashed] = ll
-      self.size += 1
     end
+
+    self.size += 1 if inserted
   end
 
   def get(key)
