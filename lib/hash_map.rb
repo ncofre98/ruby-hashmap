@@ -7,7 +7,7 @@ class HashMap
   
   def initialize
     @capacity = 16
-    @load_factor = 0.8
+    @load_factor = 0.75
     @bucket = [nil] * capacity
     @size = 0
   end
@@ -22,9 +22,10 @@ class HashMap
   end
 
   def rehash
+    all_entries = entries()
+    self.size = 0
     self.capacity *= 2
     self.bucket = [nil] * capacity
-    all_entries = entries()
 
     all_entries.each { |entry| set(entry[0], entry[1]) }
   end
@@ -36,16 +37,13 @@ class HashMap
     if bucket[hashed]
       inserted = bucket[hashed].set(key, value)
     else
-      if size > load_factor * capacity
-        rehash()
-        hashed = hash(key) % capacity
-      end
       ll = LinkedList.new
       ll.append(key, value)
       bucket[hashed] = ll
     end
 
     self.size += 1 if inserted
+    rehash() if size > load_factor * capacity
   end
 
   def get(key)

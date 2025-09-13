@@ -13,11 +13,19 @@ test.set('ice cream', 'white')
 test.set('jacket', 'blue')
 test.set('kite', 'pink')
 test.set('lion', 'golden')
+test.set('lion', 'solovino')
+test.set('dog', 'canelastico')
+
+p test
+puts "\n"
+
+test.set('moon', 'silver')
 
 p test
 p test.length
-p test.keys
-p test.values
-puts "\n\n"
+p test.entries
+
+test.set('moon', 'rosita_spain')
+p test
 p test.entries
 
